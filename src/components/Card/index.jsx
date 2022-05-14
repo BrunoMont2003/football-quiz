@@ -11,8 +11,12 @@ export const Card = ({ player }) => {
             alt={player.name}
           />
         </figure>
-        <h5 className='mb-1 text-2xl font-medium  text-white'>{player.name}</h5>
-        <span className='text-sm text-gray-400'>{player.position}</span>
+        <h5 className='text-2xl ease-in-out duration-500 font-medium  text-white'>
+          {player.name}
+        </h5>
+        <span className='text-sm ease-in-out duration-500 text-gray-400'>
+          {player.position}
+        </span>
         <div className='flex team-info ease-in-out duration-500 mt-4 space-x-3 lg:mt-8  bg-purple-900 bg-opacity-40 p-2 rounded'>
           <figure className=' w-6 h-6 flex justify-center'>
             <img src={player.leagueImage} alt='league' />

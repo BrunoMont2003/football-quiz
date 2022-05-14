@@ -1,3 +1,4 @@
+$hover-color: #fef08a;
 .bg-card {
   background-image: url('../../assets/wave-haikei.svg');
   background-size: cover;
@@ -14,5 +15,9 @@
   }
   .team-info {
     background-color: rgba(71, 85, 105, 0.363);
+  }
+  h5,
+  span {
+    color: $hover-color;
   }
 }
