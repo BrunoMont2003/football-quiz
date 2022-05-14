@@ -1,0 +1,18 @@
+.bg-card {
+  background-image: url('../../assets/wave-haikei.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.player-image {
+  border: 0.2rem solid transparent;
+}
+.bg-card:hover {
+  background-image: url('../../assets/wave-haikei-hover.svg');
+
+  .player-image {
+    border: 0.2rem solid #fef08a;
+  }
+  .team-info {
+    background-color: rgba(71, 85, 105, 0.363);
+  }
+}
