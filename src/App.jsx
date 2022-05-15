@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Button } from './components/Button'
 import { Play } from './components/Play'
 import { getPlayers } from './services/football'
 
@@ -20,21 +21,33 @@ export const App = () => {
     setPlayers(result)
     setLoading(false)
   }
+  const exit = (e) => {
+    e.preventDefault()
+    setPlaying(false)
+  }
 
   return (
     <section className='bg-main min-h-screen p-5 text-white flex gap-10 flex-col items-center justify-center'>
-      <h1 className='text-5xl'>¿Who is older?</h1>
+      <h1 className='text-5xl mb-6'>¿Who is older?</h1>
       {!playing && (
-        <button
-          className='border rounded px-5 py-2 hover:translate-y-1 ease-in-out duration-500'
-          onClick={async (e) => await handleClick(e)}
-        >
+        <Button color='yellow' onClick={async (e) => await handleClick(e)}>
           Start
-        </button>
+        </Button>
       )}
 
       {loading && <p>Loading...</p>}
-      {!loading && <Play players={players} />}
+      {!loading && playing && (
+        <main className='flex flex-col container items-center justify-center py-10 gap-10'>
+          <div className=''>
+            <Play players={players} />
+          </div>
+          <div className=''>
+            <Button color='red' onClick={exit}>
+              Exit
+            </Button>
+          </div>
+        </main>
+      )}
     </section>
   )
 }
