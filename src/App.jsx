@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { Button } from './components/Button'
 import { Play } from './components/Play'
-import { getPlayers } from './services/football'
+import { getManyPlayers } from './services/football'
 
 export const App = () => {
   const [players, setPlayers] = useState([])
+  const [temp, setTemp] = useState([])
   const [loading, setLoading] = useState(false)
   const [playing, setPlaying] = useState(false)
 
   const getData = async () => {
-    const result = await getPlayers()
+    const result = await getManyPlayers()
     return result
   }
 
@@ -17,8 +18,9 @@ export const App = () => {
     setPlaying(true)
     setLoading(true)
     e.preventDefault()
-    const result = await getData()
+    const result = temp.length === 0 ? await getData() : temp
     setPlayers(result)
+    temp.length === 0 && setTemp(result)
     setLoading(false)
   }
   const exit = (e) => {
