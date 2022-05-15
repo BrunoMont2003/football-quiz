@@ -1,10 +1,11 @@
+import moment from 'moment'
 import React from 'react'
 import './style.scss'
-export const Card = ({ player, onClick }) => {
+export const Card = ({ player, onClick, showDate = false }) => {
   return (
     <article
       role='button'
-      className='card w-64 h-80 rounded-lg  shadow-md border-slate-100 border-4 hover:cursor-pointer hover:border-yellow-200 hover:translate-y-1 duration-1000 ease-in-out'
+      className='card w-64 h-80 rounded-lg  shadow-md border-slate-100 border-4 hover:cursor-pointer hover:border-yellow-200 hover:translate-y-1 duration-1000 ease-in-out relative'
       onClick={onClick}
     >
       <div className='flex flex-col items-center py-10'>
@@ -30,6 +31,13 @@ export const Card = ({ player, onClick }) => {
           </figure>
         </div>
       </div>
+      {showDate && (
+        <div className='date-container mt-1 p-1 border w-fit bg-white'>
+          <p className=' text-3xl text-black'>
+            {moment(player.birth_date).format('ll')}
+          </p>
+        </div>
+      )}
     </article>
   )
 }

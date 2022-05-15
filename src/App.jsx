@@ -30,7 +30,7 @@ export const App = () => {
   }
 
   return (
-    <section className='bg-main min-h-screen p-5 text-white flex gap-10 flex-col items-center justify-center'>
+    <section className='bg-main min-h-screen p-5 text-white flex flex-col items-center justify-center'>
       <h1 className='text-5xl my-6 text-center'>¿Who is older?</h1>
       {!playing && (
         <Button color='yellow' onClick={async (e) => await handleClick(e)}>
@@ -40,13 +40,16 @@ export const App = () => {
 
       {loading && <p>Loading...</p>}
       {!loading && playing && (
-        <main className='flex flex-col container items-center justify-center py-10 gap-10'>
+        <main className='flex flex-col container items-center justify-center py-5 gap-10'>
           <div className=''>
             <Play players={players} />
           </div>
           <div className='flex gap-5'>
             <Button color='red' onClick={exit}>
               Exit
+            </Button>
+            <Button color='blue' onClick={exit}>
+              Next
             </Button>
           </div>
         </main>

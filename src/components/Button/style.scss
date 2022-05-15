@@ -1,5 +1,6 @@
 $yellow: #fef08a;
 $red: #d90429;
+$blue: #4433ff;
 .css-button-sliding-to-top {
   min-width: 130px;
   height: 40px;
@@ -47,6 +48,17 @@ $red: #d90429;
   }
   &:hover {
     border-color: $red;
+    color: white;
+  }
+}
+.blue {
+  color: white;
+  border: 2px solid white;
+  &:after {
+    background: $blue;
+  }
+  &:hover {
+    border-color: $blue;
     color: white;
   }
 }
