@@ -42,11 +42,27 @@ export const getManyPlayers = async (n = 40) => {
   let players = []
   for (let i = 0; i < n; i++) {
     const page = await getPlayers(i + 9)
-    console.log(page)
-    console.log('esperado 2')
     players = page.length > 0 ? players.concat(page) : players
-    console.log('players so far')
-    console.log(players)
   }
   return players
+}
+
+export const shuffle = (array) => {
+  let currentIndex = array.length
+  let randomIndex
+
+  // While there remain elements to shuffle.
+  while (currentIndex !== 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
+
+    // And swap it with the current element.
+    ;[array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex]
+    ]
+  }
+
+  return array
 }

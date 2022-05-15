@@ -1,8 +1,12 @@
 import React from 'react'
 import './style.scss'
-export const Card = ({ player }) => {
+export const Card = ({ player, onClick }) => {
   return (
-    <article className='w-64 h-80 rounded-lg  shadow-md bg-card border-slate-100 border-4 hover:cursor-pointer hover:border-yellow-200 hover:translate-y-1 duration-1000 ease-in-out'>
+    <article
+      role='button'
+      className='card w-64 h-80 rounded-lg  shadow-md border-slate-100 border-4 hover:cursor-pointer hover:border-yellow-200 hover:translate-y-1 duration-1000 ease-in-out'
+      onClick={onClick}
+    >
       <div className='flex flex-col items-center py-10'>
         <figure className='mb-3 w-28 h-28 bg-slate-800 bg-opacity-30 rounded-full shadow-lg player-image flex justify-center pt-2 duration-500 ease-in-out'>
           <img

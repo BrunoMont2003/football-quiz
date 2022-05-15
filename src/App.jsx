@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Button } from './components/Button'
 import { Play } from './components/Play'
-import { getManyPlayers } from './services/football'
+import { getManyPlayers, shuffle } from './services/football'
+// import { players as data } from './services/ExampleData'
 
 export const App = () => {
   const [players, setPlayers] = useState([])
@@ -17,20 +18,20 @@ export const App = () => {
   const handleClick = async (e) => {
     setPlaying(true)
     setLoading(true)
-    e.preventDefault()
-    const result = temp.length === 0 ? await getData() : temp
+    let result = temp.length === 0 ? await getData() : temp
+    result = shuffle(result)
     setPlayers(result)
     temp.length === 0 && setTemp(result)
     setLoading(false)
   }
   const exit = (e) => {
-    e.preventDefault()
     setPlaying(false)
+    setPlayers([])
   }
 
   return (
     <section className='bg-main min-h-screen p-5 text-white flex gap-10 flex-col items-center justify-center'>
-      <h1 className='text-5xl mb-6'>¿Who is older?</h1>
+      <h1 className='text-5xl my-6 text-center'>¿Who is older?</h1>
       {!playing && (
         <Button color='yellow' onClick={async (e) => await handleClick(e)}>
           Start
@@ -43,7 +44,7 @@ export const App = () => {
           <div className=''>
             <Play players={players} />
           </div>
-          <div className=''>
+          <div className='flex gap-5'>
             <Button color='red' onClick={exit}>
               Exit
             </Button>
