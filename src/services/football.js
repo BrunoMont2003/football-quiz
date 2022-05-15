@@ -7,6 +7,16 @@ const options = {
 }
 
 export const getPlayers = async (page = 35) => {
+  if (
+    (page >= 10 && page <= 14) ||
+    (page >= 16 && page <= 20) ||
+    (page >= 22 && page <= 27) ||
+    (page >= 29 && page <= 35) ||
+    (page >= 37 && page <= 43) ||
+    (page >= 46 && page <= 48)
+  ) {
+    return
+  }
   const URI = `https://futdb.app/api/players?page=${page}`
   try {
     const {
@@ -21,9 +31,8 @@ export const getPlayers = async (page = 35) => {
       const clubImage = await getImageFrom('club', item.club)
       item.clubImage = clubImage
     }
-    console.log(URI)
-    console.log(filteredItems)
-    console.log('espera 1')
+    filteredItems.length === 0 && console.log(`The page ${page} has 0 players`)
+    console.log(page)
     return filteredItems
   } catch (error) {
     console.log(error.message)
@@ -42,7 +51,7 @@ export const getManyPlayers = async (n = 40) => {
   let players = []
   for (let i = 0; i < n; i++) {
     const page = await getPlayers(i + 9)
-    players = page.length > 0 ? players.concat(page) : players
+    players = page && page.length > 0 ? players.concat(page) : players
   }
   return players
 }
