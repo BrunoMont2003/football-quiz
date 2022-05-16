@@ -1,10 +1,14 @@
 $hover-color: #fef08a;
+$wrong-color: #d90429;
+$correct-color: #04d972;
 .card {
   background-image: url('../../assets/wave-haikei.svg');
   background-size: cover;
   background-repeat: no-repeat;
-  &:hover {
+  border-color: white;
+  &:not(.correct, .wrong, .no-hover):hover {
     background-image: url('../../assets/wave-haikei-hover.svg');
+    border-color: $hover-color !important;
 
     .player-image {
       border: 0.2rem solid #fef08a;
@@ -17,9 +21,6 @@ $hover-color: #fef08a;
       color: $hover-color;
     }
   }
-  &:active {
-    background-color: black;
-  }
 }
 .player-image {
   border: 0.2rem solid transparent;
@@ -31,4 +32,20 @@ $hover-color: #fef08a;
   right: 0;
   margin-left: auto;
   margin-right: auto;
+}
+.correct {
+  background-image: url('../../assets/wave-haikei-correct.svg');
+  border-color: $correct-color !important;
+  h5,
+  span {
+    color: $correct-color;
+  }
+}
+.wrong {
+  background-image: url('../../assets/wave-haikei-wrong.svg');
+  border-color: $wrong-color !important;
+  h5,
+  span {
+    color: $wrong-color;
+  }
 }

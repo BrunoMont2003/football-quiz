@@ -11,15 +11,21 @@ export const Play = ({ players, exit }) => {
   const [nextPair, setNextPair] = useState(null)
   const [showDate, setShowDate] = useState(false)
   const [response, setResponse] = useState(null)
+  const [statusCurrent, setStatusCurrent] = useState('')
+  const [statusOlder, setStatusOlder] = useState('')
 
-  const handleClick = ({ id, name }) => {
+  const handleClick = ({ id }) => {
+    if (response !== null) return
     const olderPlayerDate = moment(olderPlayer.birth_date)
     const currentPlayerDate = moment(currentPlayer.birth_date)
+    let styleOlder = ''
+    let styleCurrent = ''
     //* a.diff(b) -> a - b < 0
     //* If the moment is earlier than the moment you are passing to moment.fn.diff, the return value will be negative.
     if (id === currentPlayer.id) {
       // you think that de current player is older than the other
       const res = currentPlayerDate.diff(olderPlayerDate) <= 0
+      styleCurrent = res ? 'correct' : 'wrong'
       setResponse(res)
       setShowDate(true)
       if (res && index < players.length - 1) {
@@ -34,6 +40,7 @@ export const Play = ({ players, exit }) => {
     } else {
       // you think that de older player is older than the current
       const res = olderPlayerDate.diff(currentPlayerDate) <= 0
+      styleOlder = res ? 'correct' : 'wrong'
       setResponse(res)
       setShowDate(true)
       if (res && index < players.length - 1) {
@@ -46,12 +53,17 @@ export const Play = ({ players, exit }) => {
         setPoints(points + 1)
       }
     }
+    console.log(statusCurrent, statusOlder)
+    setStatusCurrent(styleCurrent + ' no-hover')
+    setStatusOlder(styleOlder + ' no-hover')
   }
   const onNext = () => {
     setCurrentPlayer(nextPair.currentPlayer)
     setOlderPlayer(nextPair.olderPlayer)
     setShowDate(false)
     setResponse(null)
+    setStatusOlder('')
+    setStatusCurrent('')
   }
 
   return (
@@ -62,11 +74,13 @@ export const Play = ({ players, exit }) => {
           player={olderPlayer}
           onClick={() => handleClick(olderPlayer)}
           showDate={showDate}
+          status={statusOlder}
         />
         <Card
           player={currentPlayer}
           onClick={() => handleClick(currentPlayer)}
           showDate={showDate}
+          status={statusCurrent}
         />
       </div>
       <div className='flex mt-5 gap-5'>
