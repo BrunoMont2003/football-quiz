@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Button } from './components/Button'
 import { Play } from './components/Play'
 import { getManyPlayers, shuffle } from './services/football'
-// import { players as data } from './services/ExampleData'
+import { players as data } from './services/ExampleData'
 
 export const App = () => {
   const [players, setPlayers] = useState([])
-  const [temp, setTemp] = useState([])
+  const [temp, setTemp] = useState(data) // || useState([])
   const [loading, setLoading] = useState(false)
   const [playing, setPlaying] = useState(false)
 
@@ -42,15 +42,7 @@ export const App = () => {
       {!loading && playing && (
         <main className='flex flex-col container items-center justify-center py-5 gap-10'>
           <div className=''>
-            <Play players={players} />
-          </div>
-          <div className='flex gap-5'>
-            <Button color='red' onClick={exit}>
-              Exit
-            </Button>
-            <Button color='blue' onClick={exit}>
-              Next
-            </Button>
+            <Play players={players} exit={exit} />
           </div>
         </main>
       )}

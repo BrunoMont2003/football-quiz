@@ -1,14 +1,17 @@
 import moment from 'moment'
 import React, { useState } from 'react'
+import { Button } from './Button'
 import { Card } from './Card'
 
-export const Play = ({ players }) => {
+export const Play = ({ players, exit }) => {
   const [index, setIndex] = useState(1)
   const [points, setPoints] = useState(0)
   const [olderPlayer, setOlderPlayer] = useState(players[0])
   const [currentPlayer, setCurrentPlayer] = useState(players[1])
-  const [response, setResponse] = useState(null)
+  const [nextPair, setNextPair] = useState(null)
   const [showDate, setShowDate] = useState(false)
+  const [response, setResponse] = useState(null)
+
   const handleClick = ({ id, name }) => {
     const olderPlayerDate = moment(olderPlayer.birth_date)
     const currentPlayerDate = moment(currentPlayer.birth_date)
@@ -20,8 +23,11 @@ export const Play = ({ players }) => {
       setResponse(res)
       setShowDate(true)
       if (res && index < players.length - 1) {
-        setOlderPlayer(currentPlayer)
-        setCurrentPlayer(players[index + 1])
+        const pair = {
+          olderPlayer: currentPlayer,
+          currentPlayer: players[index + 1]
+        }
+        setNextPair(pair)
         setIndex(index + 1)
         setPoints(points + 1)
       }
@@ -31,11 +37,21 @@ export const Play = ({ players }) => {
       setResponse(res)
       setShowDate(true)
       if (res && index < players.length - 1) {
-        setCurrentPlayer(players[index + 1])
+        const pair = {
+          olderPlayer,
+          currentPlayer: players[index + 1]
+        }
+        setNextPair(pair)
         setIndex(index + 1)
         setPoints(points + 1)
       }
     }
+  }
+  const onNext = () => {
+    setCurrentPlayer(nextPair.currentPlayer)
+    setOlderPlayer(nextPair.olderPlayer)
+    setShowDate(false)
+    setResponse(null)
   }
 
   return (
@@ -52,6 +68,16 @@ export const Play = ({ players }) => {
           onClick={() => handleClick(currentPlayer)}
           showDate={showDate}
         />
+      </div>
+      <div className='flex mt-5 gap-5'>
+        <Button color='red' onClick={exit}>
+          Exit
+        </Button>
+        {response && (
+          <Button color='blue' onClick={onNext}>
+            Next
+          </Button>
+        )}
       </div>
     </section>
   )
