@@ -2,8 +2,9 @@ import moment from 'moment'
 import React, { useState } from 'react'
 import { Button } from './Button'
 import { Card } from './Card'
+import { GameOver } from './GameOver'
 
-export const Play = ({ players, exit }) => {
+export const Play = ({ players, exit, start }) => {
   const [index, setIndex] = useState(1)
   const [points, setPoints] = useState(0)
   const [olderPlayer, setOlderPlayer] = useState(players[0])
@@ -26,7 +27,7 @@ export const Play = ({ players, exit }) => {
       // you think that de current player is older than the other
       const res = currentPlayerDate.diff(olderPlayerDate) <= 0
       styleCurrent = res ? 'correct' : 'wrong'
-      setResponse(res)
+      setTimeout(() => setResponse(res), 1000)
       setShowDate(true)
       if (res && index < players.length - 1) {
         const pair = {
@@ -41,7 +42,7 @@ export const Play = ({ players, exit }) => {
       // you think that de older player is older than the current
       const res = olderPlayerDate.diff(currentPlayerDate) <= 0
       styleOlder = res ? 'correct' : 'wrong'
-      setResponse(res)
+      setTimeout(() => setResponse(res), 1000)
       setShowDate(true)
       if (res && index < players.length - 1) {
         const pair = {
@@ -93,6 +94,7 @@ export const Play = ({ players, exit }) => {
           </Button>
         )}
       </div>
+      {response === false && <GameOver done={exit} points={points} />}
     </section>
   )
 }

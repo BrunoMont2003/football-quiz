@@ -15,7 +15,7 @@ export const App = () => {
     return result
   }
 
-  const handleClick = async (e) => {
+  const start = async () => {
     setPlaying(true)
     setLoading(true)
     let result = temp.length === 0 ? await getData() : temp
@@ -24,7 +24,7 @@ export const App = () => {
     temp.length === 0 && setTemp(result)
     setLoading(false)
   }
-  const exit = (e) => {
+  const exit = () => {
     setPlaying(false)
     setPlayers([])
   }
@@ -33,7 +33,7 @@ export const App = () => {
     <section className='bg-main min-h-screen p-5 text-white flex flex-col items-center justify-center'>
       <h1 className='text-5xl my-6 text-center'>¿Who is older?</h1>
       {!playing && (
-        <Button color='yellow' onClick={async (e) => await handleClick(e)}>
+        <Button color='yellow' onClick={async (e) => await start(e)}>
           Start
         </Button>
       )}
