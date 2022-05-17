@@ -1,8 +1,10 @@
 import moment from 'moment'
 import React, { useState } from 'react'
-import { Button } from './Button'
-import { Card } from './Card'
-import { GameOver } from './GameOver'
+import { Button } from '../Button'
+import { Card } from '../Card'
+import { GameOver } from '../GameOver'
+import { motion } from 'framer-motion'
+import './style.scss'
 
 export const Play = ({ players, exit, start }) => {
   const [index, setIndex] = useState(1)
@@ -16,6 +18,7 @@ export const Play = ({ players, exit, start }) => {
   const [statusOlder, setStatusOlder] = useState('')
   const [win, setWin] = useState(false)
   const [defeat, setDefeat] = useState(false)
+  const [next, setNext] = useState(false)
 
   const handleClick = ({ id }) => {
     if (response !== null) return
@@ -73,12 +76,24 @@ export const Play = ({ players, exit, start }) => {
     setStatusOlder(styleOlder + ' no-hover')
   }
   const onNext = () => {
-    setCurrentPlayer(nextPair.currentPlayer)
+    setNext(true)
     setOlderPlayer(nextPair.olderPlayer)
     setShowDate(false)
     setResponse(null)
     setStatusOlder('')
     setStatusCurrent('')
+    setTimeout(() => {
+      setCurrentPlayer(nextPair.currentPlayer)
+      setNext(false)
+    }, 500)
+  }
+  const variants = {
+    sliding: {
+      opacity: 0
+    },
+    normal: {
+      opacity: 1
+    }
   }
 
   return (
@@ -86,7 +101,11 @@ export const Play = ({ players, exit, start }) => {
       <h4 className='text-xl mb-5'>
         {points} / {players.length - 1} points
       </h4>
-      <div className='flex flex-col md:flex-row gap-10 md:gap-y-0'>
+      <motion.div
+        variants={variants}
+        animate={next ? 'sliding' : 'normal'}
+        className='flex flex-col md:flex-row gap-10 md:gap-y-0 slide-right'
+      >
         <Card
           player={olderPlayer}
           onClick={() => handleClick(olderPlayer)}
@@ -99,7 +118,7 @@ export const Play = ({ players, exit, start }) => {
           showDate={showDate}
           status={statusCurrent}
         />
-      </div>
+      </motion.div>
       <div className='flex mt-5 gap-5'>
         <Button color='red' onClick={exit}>
           Exit

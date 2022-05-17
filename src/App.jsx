@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Button } from './components/Button'
 import { Play } from './components/Play'
 import { getManyPlayers, shuffle } from './services/football'
@@ -27,15 +28,26 @@ export const App = () => {
     setPlaying(false)
     setPlayers([])
   }
+  // const variants {
+  //   initial:
+  // }
 
   return (
-    <section className='bg-main min-h-screen p-5 text-white flex flex-col items-center justify-center'>
-      <h1 className='text-5xl my-6 text-center'>¿Who is older?</h1>
-      {!playing && (
-        <Button color='yellow' onClick={async (e) => await start(e)}>
-          Start
-        </Button>
-      )}
+    <motion.section className='bg-main min-h-screen p-5 text-white flex flex-col items-center justify-center'>
+      <motion.div
+        transition={{ duration: 3, ease: 'easeInOut' }}
+        animate={{
+          x: ['-100px', '-50px', '100px', '50px', '0px']
+        }}
+        className='flex justify-center items-center flex-col'
+      >
+        <h1 className='text-5xl my-6 text-center'>¿Who is older?</h1>
+        {!playing && (
+          <Button color='yellow' onClick={async (e) => await start(e)}>
+            Start
+          </Button>
+        )}
+      </motion.div>
 
       {loading && <p>Loading...</p>}
       {!loading && playing && (
@@ -45,6 +57,6 @@ export const App = () => {
           </div>
         </main>
       )}
-    </section>
+    </motion.section>
   )
 }
