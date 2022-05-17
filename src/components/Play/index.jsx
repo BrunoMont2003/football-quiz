@@ -97,7 +97,7 @@ export const Play = ({ players, exit, start }) => {
   }
 
   return (
-    <section className='w-100 flex flex-col gap-5 flex-wrap items-center justify-center'>
+    <div className='w-100 flex flex-col gap-5 flex-wrap items-center justify-center'>
       <h4 className='text-xl mb-5'>
         {points} / {players.length - 1} points
       </h4>
@@ -131,6 +131,6 @@ export const Play = ({ players, exit, start }) => {
       </div>
       {defeat && <GameOver done={exit} points={points} status='defeat' />}
       {win && <GameOver done={exit} points={points} status='win' />}
-    </section>
+    </div>
   )
 }
