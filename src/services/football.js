@@ -18,11 +18,12 @@ export const getPlayers = async (page = 35) => {
     return
   }
   const URI = `https://futdb.app/api/players?page=${page}`
+  const rareRarity = 1
   try {
     const {
       data: { items }
     } = await axios.get(URI, options)
-    const filteredItems = items.filter((item) => item.rarity === 1)
+    const filteredItems = items.filter((item) => item.rarity === rareRarity)
     for (const item of filteredItems) {
       const playerImage = await getImageFrom('player', item.id)
       item.playerImage = playerImage
