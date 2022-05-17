@@ -4,9 +4,8 @@ import { Button } from '../Button'
 import { Card } from '../Card'
 import { GameOver } from '../GameOver'
 import { motion } from 'framer-motion'
-import './style.scss'
 
-export const Play = ({ players, exit, start }) => {
+export const Play = ({ players, exit, playing }) => {
   const [index, setIndex] = useState(1)
   const [points, setPoints] = useState(0)
   const [olderPlayer, setOlderPlayer] = useState(players[0])
@@ -71,7 +70,6 @@ export const Play = ({ players, exit, start }) => {
         setTimeout(() => setDefeat(true), 1000)
       }
     }
-    console.log(statusCurrent, statusOlder)
     setStatusCurrent(styleCurrent + ' no-hover')
     setStatusOlder(styleOlder + ' no-hover')
   }
@@ -93,6 +91,9 @@ export const Play = ({ players, exit, start }) => {
     },
     normal: {
       opacity: 1
+    },
+    playing: {
+      opacity: [0, 1]
     }
   }
 
@@ -103,7 +104,7 @@ export const Play = ({ players, exit, start }) => {
       </h4>
       <motion.div
         variants={variants}
-        animate={next ? 'sliding' : 'normal'}
+        animate={playing && !next ? 'playing' : next ? 'sliding' : 'normal'}
         className='flex flex-col md:flex-row gap-10 md:gap-y-0 slide-right'
       >
         <Card

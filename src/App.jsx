@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Button } from './components/Button'
 import { Play } from './components/Play'
 import { getManyPlayers, shuffle } from './services/football'
+import { Loader } from './components/Loader'
 
 export const App = () => {
   const [players, setPlayers] = useState([])
@@ -28,17 +29,29 @@ export const App = () => {
     setPlaying(false)
     setPlayers([])
   }
-  // const variants {
-  //   initial:
-  // }
-
+  const mainVariants = {
+    noPlaying: {
+      transition: {
+        duration: 1,
+        type: 'spring',
+        stiffness: 260,
+        damping: 20
+      },
+      y: ['0px', '-300px', '0px'],
+      opacity: 1
+    },
+    playing: {
+      transition: {
+        duration: 1
+      },
+      opacity: [0, 1]
+    }
+  }
   return (
-    <motion.section className='bg-main min-h-screen p-5 text-white flex flex-col items-center justify-center'>
-      <motion.div
-        transition={{ duration: 3, ease: 'easeInOut' }}
-        animate={{
-          x: ['-100px', '-50px', '100px', '50px', '0px']
-        }}
+    <motion.main className='bg-main min-h-screen sm:p-5 text-white flex flex-col items-center justify-center relative'>
+      <motion.section
+        variants={mainVariants}
+        animate={!playing ? 'noPlaying' : 'playing'}
         className='flex justify-center items-center flex-col'
       >
         <h1 className='text-5xl my-6 text-center'>¿Who is older?</h1>
@@ -47,16 +60,14 @@ export const App = () => {
             Start
           </Button>
         )}
-      </motion.div>
+      </motion.section>
 
-      {loading && <p>Loading...</p>}
+      {loading && <Loader />}
       {!loading && playing && (
-        <main className='flex flex-col container items-center justify-center py-5 gap-10'>
-          <div className=''>
-            <Play players={players} exit={exit} />
-          </div>
-        </main>
+        <section className='flex flex-col container items-center justify-center py-5 gap-10'>
+          <Play players={players} exit={exit} playing={playing} />
+        </section>
       )}
-    </motion.section>
+    </motion.main>
   )
 }
