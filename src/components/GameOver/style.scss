@@ -8,8 +8,13 @@
   backdrop-filter: blur(8px); // This be the blur
 }
 .game-over-card {
-  background-image: url('../../assets/game-over.svg');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+}
+.defeat {
+  background-image: url('../../assets/game-over.svg');
+}
+.win {
+  background-image: url('../../assets/game-win.svg');
 }

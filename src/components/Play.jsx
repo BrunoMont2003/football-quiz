@@ -14,6 +14,8 @@ export const Play = ({ players, exit, start }) => {
   const [response, setResponse] = useState(null)
   const [statusCurrent, setStatusCurrent] = useState('')
   const [statusOlder, setStatusOlder] = useState('')
+  const [win, setWin] = useState(false)
+  const [defeat, setDefeat] = useState(false)
 
   const handleClick = ({ id }) => {
     if (response !== null) return
@@ -29,14 +31,20 @@ export const Play = ({ players, exit, start }) => {
       styleCurrent = res ? 'correct' : 'wrong'
       setTimeout(() => setResponse(res), 1000)
       setShowDate(true)
-      if (res && index < players.length - 1) {
-        const pair = {
-          olderPlayer: currentPlayer,
-          currentPlayer: players[index + 1]
+      if (res) {
+        if (index < players.length - 1) {
+          const pair = {
+            olderPlayer: currentPlayer,
+            currentPlayer: players[index + 1]
+          }
+          setNextPair(pair)
+          setIndex(index + 1)
+          setPoints(points + 1)
+        } else if (index === players.length - 1) {
+          setTimeout(() => setWin(true), 1000)
         }
-        setNextPair(pair)
-        setIndex(index + 1)
-        setPoints(points + 1)
+      } else {
+        setTimeout(() => setDefeat(true), 1000)
       }
     } else {
       // you think that de older player is older than the current
@@ -44,14 +52,20 @@ export const Play = ({ players, exit, start }) => {
       styleOlder = res ? 'correct' : 'wrong'
       setTimeout(() => setResponse(res), 1000)
       setShowDate(true)
-      if (res && index < players.length - 1) {
-        const pair = {
-          olderPlayer,
-          currentPlayer: players[index + 1]
+      if (res) {
+        if (index < players.length - 1) {
+          const pair = {
+            olderPlayer,
+            currentPlayer: players[index + 1]
+          }
+          setNextPair(pair)
+          setIndex(index + 1)
+          setPoints(points + 1)
+        } else if (index === players.length - 1) {
+          setTimeout(() => setWin(true), 1000)
         }
-        setNextPair(pair)
-        setIndex(index + 1)
-        setPoints(points + 1)
+      } else {
+        setTimeout(() => setDefeat(true), 1000)
       }
     }
     console.log(statusCurrent, statusOlder)
@@ -69,7 +83,9 @@ export const Play = ({ players, exit, start }) => {
 
   return (
     <section className='w-100 flex flex-col gap-5 flex-wrap items-center justify-center'>
-      <h4 className='text-xl mb-5'>{points} points</h4>
+      <h4 className='text-xl mb-5'>
+        {points} / {players.length - 2} points
+      </h4>
       <div className='flex flex-col md:flex-row gap-10 md:gap-y-0'>
         <Card
           player={olderPlayer}
@@ -94,7 +110,8 @@ export const Play = ({ players, exit, start }) => {
           </Button>
         )}
       </div>
-      {response === false && <GameOver done={exit} points={points} />}
+      {defeat && <GameOver done={exit} points={points} status='defeat' />}
+      {win && <GameOver done={exit} points={points} status='win' />}
     </section>
   )
 }
