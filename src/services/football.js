@@ -13,7 +13,7 @@ export const getPlayers = async (page = 35) => {
     (page >= 22 && page <= 27) ||
     (page >= 29 && page <= 35) ||
     (page >= 37 && page <= 43) ||
-    (page >= 46 && page <= 48)
+    (page >= 46 && page <= 51)
   ) {
     return
   }
@@ -47,11 +47,21 @@ export const getImageFrom = async (param = 'player', id) => {
 
   return image
 }
-export const getManyPlayers = async (n = 40) => {
+export const getManyPlayers = async (n = 31) => {
   let players = []
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; players.length < n; i++) {
     const page = await getPlayers(i + 9)
     players = page && page.length > 0 ? players.concat(page) : players
+  }
+  players = getExactPlayers(players, n)
+
+  return players
+}
+
+const getExactPlayers = (players, n) => {
+  const diff = players.length - n
+  if (diff > 0) {
+    players = players.slice(0, diff * -1)
   }
   return players
 }

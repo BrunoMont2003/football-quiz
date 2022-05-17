@@ -39,10 +39,10 @@ export const Play = ({ players, exit, start }) => {
           }
           setNextPair(pair)
           setIndex(index + 1)
-          setPoints(points + 1)
         } else if (index === players.length - 1) {
           setTimeout(() => setWin(true), 1000)
         }
+        setPoints(points + 1)
       } else {
         setTimeout(() => setDefeat(true), 1000)
       }
@@ -60,10 +60,10 @@ export const Play = ({ players, exit, start }) => {
           }
           setNextPair(pair)
           setIndex(index + 1)
-          setPoints(points + 1)
         } else if (index === players.length - 1) {
           setTimeout(() => setWin(true), 1000)
         }
+        setPoints(points + 1)
       } else {
         setTimeout(() => setDefeat(true), 1000)
       }
@@ -84,7 +84,7 @@ export const Play = ({ players, exit, start }) => {
   return (
     <section className='w-100 flex flex-col gap-5 flex-wrap items-center justify-center'>
       <h4 className='text-xl mb-5'>
-        {points} / {players.length - 2} points
+        {points} / {players.length - 1} points
       </h4>
       <div className='flex flex-col md:flex-row gap-10 md:gap-y-0'>
         <Card

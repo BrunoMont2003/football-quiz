@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import { Button } from './components/Button'
 import { Play } from './components/Play'
 import { getManyPlayers, shuffle } from './services/football'
-import { players as data } from './services/ExampleData'
 
 export const App = () => {
   const [players, setPlayers] = useState([])
-  const [temp, setTemp] = useState(data) // || useState([])
+  const [temp, setTemp] = useState([])
   const [loading, setLoading] = useState(false)
   const [playing, setPlaying] = useState(false)
 
   const getData = async () => {
-    const result = await getManyPlayers()
+    const result = await getManyPlayers(11)
     return result
   }
 
