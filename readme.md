@@ -14,11 +14,11 @@ This project is a quiz where the user will prove their football knowledge. The a
 
 ### Vite + React JS + Tailwind CSS
 
-To create a React App, **Vite** was the best option.
-This site was bult using [React JS](https://reactjs.org/) and [Tailwind CSS](https://tailwindcss.com/) for the frontend
-In **ReactJS** , it was worked with functional components and useState Hook.
-In addition, to animate UI, **[framer-motion](https://www.framer.com/motion/)** library was used.
-Also, almost all jsx tags includes **Tailwind's** utilities classes.
+- To create a React App, **Vite** was the best option.
+- This site was built using [React JS](https://reactjs.org/) and [Tailwind CSS](https://tailwindcss.com/).
+- In **ReactJS** , it was worked with functional components and useState Hook.
+- In addition, to animate UI, **[framer-motion](https://www.framer.com/motion/)** library was used.
+- Also, almost all jsx tags includes **Tailwind's** utilities classes.
 
 ## Docs
 
