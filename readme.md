@@ -8,6 +8,8 @@ This project is a quiz where the user will prove their football knowledge. The a
 
 ## Demo
 
+[![Watch the video](./src/assets/video_capture.png)](https://youtu.be/Lbk9GJIhffY)
+
 ## Tech Stack
 
 ![Stack](./src/assets/stack.png)
