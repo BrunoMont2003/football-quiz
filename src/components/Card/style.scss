@@ -1,0 +1,51 @@
+$hover-color: #fef08a;
+$wrong-color: #d90429;
+$correct-color: #04d972;
+.card {
+  background-image: url('../../assets/wave-haikei.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-color: white;
+  &:not(.correct, .wrong, .no-hover):hover {
+    background-image: url('../../assets/wave-haikei-hover.svg');
+    border-color: $hover-color !important;
+
+    .player-image {
+      border: 0.2rem solid #fef08a;
+    }
+    .team-info {
+      background-color: rgba(71, 85, 105, 0.363);
+    }
+    h5,
+    span {
+      color: $hover-color;
+    }
+  }
+}
+.player-image {
+  border: 0.2rem solid transparent;
+}
+.date-container {
+  position: absolute;
+  top: -1.6rem;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.correct {
+  background-image: url('../../assets/wave-haikei-correct.svg');
+  border-color: $correct-color !important;
+  h5,
+  span {
+    color: $correct-color;
+  }
+}
+.wrong {
+  background-image: url('../../assets/wave-haikei-wrong.svg');
+  border-color: $wrong-color !important;
+  h5,
+  span {
+    color: $wrong-color;
+  }
+}

@@ -1,0 +1,89 @@
+$yellow: #fef08a;
+$red: #d90429;
+$blue: #4433ff;
+$black: #212529;
+$green: #005e05;
+.css-button-sliding-to-top {
+  min-width: 130px;
+  font-size: 1.5rem;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  z-index: 0;
+  background: transparent;
+  overflow: hidden;
+  &:hover {
+    color: #140021;
+  }
+  &:hover::after {
+    height: 100%;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    transition: all 0.3s ease;
+    left: 0;
+    bottom: 0;
+    height: 0;
+    width: 100%;
+  }
+}
+.yellow {
+  color: $yellow;
+  border: 2px solid $yellow;
+  &:after {
+    background: $yellow;
+  }
+}
+.red {
+  color: white;
+  border: 2px solid white;
+  &:after {
+    background: $red;
+  }
+  &:hover {
+    border-color: $red;
+    color: white;
+  }
+}
+.blue {
+  color: white;
+  border: 2px solid white;
+  &:after {
+    background: $blue;
+  }
+  &:hover {
+    border-color: $blue;
+    color: white;
+  }
+}
+
+.black {
+  color: white;
+  border: 2px solid white;
+  &:after {
+    background: $black;
+  }
+  &:hover {
+    border-color: $black;
+    color: white;
+  }
+}
+.green {
+  color: white;
+  border: 2px solid white;
+  &:after {
+    background: $green;
+  }
+  &:hover {
+    border-color: $green;
+    color: white;
+  }
+}
