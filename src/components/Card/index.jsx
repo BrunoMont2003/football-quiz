@@ -34,11 +34,7 @@ export const Card = ({ player, onClick, showDate = false, status }) => {
       {showDate && (
         <div className='date-container mt-1 p-1 border w-fit bg-white'>
           <p className=' text-3xl text-black'>
-<<<<<<< HEAD
             {moment(player.birth_date ?? player.birthDate).format('ll')}
-=======
-            {moment(player.birth_date).format('ll')}
->>>>>>> 680ff103d224a84057ff52599363499b6356b444
           </p>
         </div>
       )}
